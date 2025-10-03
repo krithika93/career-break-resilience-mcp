@@ -1,0 +1,91 @@
+graph TB
+    subgraph "🎯 Career Break Resilience System"
+        User[👤 Career Returner<br/>User Input]
+        
+        subgraph "🧠 MCP Server - Custom Tools Layer"
+            JD[📋 Job Description<br/>Parser Tool]
+            Market[📊 Market Intelligence<br/>Tool]
+            ATS[🤖 ATS Scanner<br/>Tool]
+            Skills[🎯 Skill Gap<br/>Analyzer Tool]
+            Learning[📚 Learning Path<br/>Generator Tool]
+            Resume[📄 Resume Optimizer<br/>Tool]
+        end
+        
+        subgraph "🎭 Claude MCP Client - Orchestration Layer"
+            Agent[🎪 Multi-Agent<br/>Orchestrator]
+            Memory[🧠 Conversation<br/>Memory]
+            Router[🔀 Workflow<br/>Router]
+        end
+        
+        subgraph "💾 Knowledge & Data Layer"
+            VectorDB[(🗄️ Vector Database<br/>Job Market Knowledge)]
+            GraphDB[(🕸️ Graph Database<br/>Skills Relationships)]
+            Cache[(⚡ Redis Cache<br/>Prompt/Response)]
+        end
+        
+        subgraph "🔧 RAG Pipeline"
+            Embed[🔤 Embeddings<br/>text-embedding-3]
+            Retrieve[🔍 Semantic<br/>Retrieval]
+            Rerank[⭐ Re-ranking<br/>Cohere/Cross-encoder]
+        end
+        
+        subgraph "📤 Output Generation"
+            Report[📊 Analysis Report]
+            Plan[📋 Learning Plan]
+            OptResume[✅ Optimized Resume]
+        end
+    end
+    
+    %% User Flow
+    User -->|Job Description +<br/>Current Resume| Agent
+    
+    %% Agent orchestrates tools via MCP
+    Agent -->|Segment 1:<br/>Parse JD| JD
+    Agent -->|Segment 2:<br/>Market Analysis| Market
+    Agent -->|Segment 3:<br/>ATS Check| ATS
+    Agent -->|Segment 4:<br/>Gap Analysis| Skills
+    Agent -->|Segment 5:<br/>Learning Path| Learning
+    Agent -->|Segment 6:<br/>Resume Tailor| Resume
+    
+    %% Tools interact with data layer
+    JD --> Embed
+    Market --> VectorDB
+    ATS --> Cache
+    Skills --> GraphDB
+    Learning --> VectorDB
+    Resume --> Cache
+    
+    %% RAG Pipeline
+    Embed --> VectorDB
+    VectorDB --> Retrieve
+    Retrieve --> Rerank
+    Rerank --> Agent
+    
+    %% Memory management
+    Agent --> Memory
+    Memory --> Router
+    Router --> Agent
+    
+    %% Output generation
+    Agent --> Report
+    Agent --> Plan
+    Agent --> OptResume
+    
+    Report --> User
+    Plan --> User
+    OptResume --> User
+    
+    %% Styling
+    classDef userStyle fill:#e1f5ff,stroke:#0066cc,stroke-width:3px
+    classDef mcpStyle fill:#fff4e6,stroke:#ff9800,stroke-width:2px
+    classDef claudeStyle fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
+    classDef dataStyle fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
+    classDef ragStyle fill:#fce4ec,stroke:#e91e63,stroke-width:2px
+    classDef outputStyle fill:#e0f2f1,stroke:#009688,stroke-width:2px
+    
+    class User userStyle
+    class JD,Market,ATS,Skills,Learning,Resume mcpStyle
+    class Agent,Memory,Router claudeStyle
+    class VectorDB,GraphDB,Cache dataStyle
+    class Embed,Retrieve,Rerank ragStyle
+    class Report,Plan,OptResume outputStyle
