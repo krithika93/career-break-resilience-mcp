@@ -21,6 +21,10 @@ This is a **working prototype** that showcases:
 
 ---
 
+<img width="2852" height="1626" alt="image" src="https://github.com/user-attachments/assets/b8aee44f-eb37-4d1a-9f6a-ca9c48fc5900" />
+
+<img width="1214" height="1158" alt="image" src="https://github.com/user-attachments/assets/47f9470b-aaa2-4c1a-9893-70047b9563fa" />
+
 ## 🏗️ Current Architecture
 
 ### What's Implemented ✅
